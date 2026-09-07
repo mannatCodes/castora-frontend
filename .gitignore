@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Production builds and test output
+build/
+coverage/
+.nyc_output/
+
+# Local environment settings
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Logs and caches
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.cache/
+.parcel-cache/
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
