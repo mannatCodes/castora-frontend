@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import ChatMessage, { LoadingIndicator } from '../components/ChatMessage';
 import SourceSelection from '../components/SourceSelection';
@@ -13,7 +13,6 @@ import api from '../services/api';
 
 const PodcastSession = () => {
    const { sessionId } = useParams();
-   const navigate = useNavigate();
    const [messages, setMessages] = useState([]);
    const [inputMessage, setInputMessage] = useState('');
    const [loading, setLoading] = useState(false);
@@ -29,7 +28,7 @@ const PodcastSession = () => {
    const [isScriptModalOpen, setIsScriptModalOpen] = useState(false);
    const [isFinalScriptModalOpen, setIsFinalScriptModalOpen] = useState(false);
    const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-   const [showRecordingPlayer, setShowRecordingPlayer] = useState(false);
+   const [, setShowRecordingPlayer] = useState(false);
    const [webSearchRecording, setWebSearchRecording] = useState(null);
    const [selectedLanguageCode, setSelectedLanguageCode] = useState('en');
    const [availableLanguages, setAvailableLanguages] = useState([{ code: 'en', name: 'English' }]);
@@ -49,6 +48,8 @@ const PodcastSession = () => {
             hasAutoOpenedRecording.current = true;
          }
       }
+   // The stage is read only to mark the one-time player opening.
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [webSearchRecording]);
 
    useEffect(() => {
@@ -69,6 +70,7 @@ const PodcastSession = () => {
          if (pollTimerRef.current) clearInterval(pollTimerRef.current);
          window.removeEventListener('resize', handleResize);
       };
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [sessionId]);
 
    useEffect(() => {
@@ -514,6 +516,8 @@ const PodcastSession = () => {
       }));
       const message = 'I approve this script. It looks good!';
       sendDirectMessage(message);
+   // sendDirectMessage is declared below because it depends on these handlers.
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    const handleBannerConfirm = useCallback(() => {
@@ -523,6 +527,8 @@ const PodcastSession = () => {
       }));
       const message = 'I approve this banner. It looks good!';
       sendDirectMessage(message);
+   // sendDirectMessage is declared below because it depends on these handlers.
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    const handleAudioConfirm = useCallback(() => {
@@ -532,6 +538,8 @@ const PodcastSession = () => {
       }));
       const message = "The audio sounds great! I'm happy with the final podcast.";
       sendDirectMessage(message);
+   // sendDirectMessage is declared below because it depends on these handlers.
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    const sendDirectMessage = async message => {

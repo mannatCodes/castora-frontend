@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const FinalPresentation = ({
@@ -13,11 +13,6 @@ const FinalPresentation = ({
    onToggleScriptModal,
    podcastId,
 }) => {
-   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-   const handleAudioPlay = () => setIsAudioPlaying(true);
-   const handleAudioPause = () => setIsAudioPlaying(false);
-   const handleAudioEnded = () => setIsAudioPlaying(false);
-
    return (
       <div className="space-y-4 overflow-hidden">
          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
@@ -100,9 +95,6 @@ const FinalPresentation = ({
                                  className="w-full h-8"
                                  controls
                                  src={audioUrl}
-                                 onPlay={handleAudioPlay}
-                                 onPause={handleAudioPause}
-                                 onEnded={handleAudioEnded}
                               ></audio>
                            </div>
                         )}

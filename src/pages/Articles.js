@@ -10,7 +10,7 @@ const Articles = () => {
    const [error, setError] = useState(null);
    const [hoveredCard, setHoveredCard] = useState(null);
    const [page, setPage] = useState(1);
-   const [perPage, setPerPage] = useState(10);
+   const [perPage] = useState(10);
    const [totalPages, setTotalPages] = useState(0);
    const [totalItems, setTotalItems] = useState(0);
    const [hasNext, setHasNext] = useState(false);
@@ -87,16 +87,14 @@ const Articles = () => {
       return new Date(dateString).toLocaleDateString(undefined, options);
    };
 
-   const isSameLocalDate = (left, right) =>
-      left.getFullYear() === right.getFullYear() &&
-      left.getMonth() === right.getMonth() &&
-      left.getDate() === right.getDate();
-
    const isLatestArticleStale = () => {
-      if (!latestPublishedDate) return false;
-      const latestDate = new Date(latestPublishedDate);
+      // Publishing can pause overnight even when the feed crawler ran. The
+      // crawl time is the reliable indicator that this app refreshed data.
+      const refreshDate = latestCrawledDate || latestPublishedDate;
+      if (!refreshDate) return false;
+      const latestDate = new Date(refreshDate);
       if (Number.isNaN(latestDate.getTime())) return false;
-      return !isSameLocalDate(latestDate, new Date());
+      return new Date() - latestDate > 30 * 60 * 60 * 1000;
    };
 
    const renderCategories = categories => {
@@ -328,11 +326,11 @@ const Articles = () => {
          )}
          {!loading && !error && isLatestArticleStale() && (
             <div className="bg-gradient-to-r from-amber-950 to-gray-900 border border-amber-700/60 rounded-sm p-4 mb-4 text-sm text-amber-100">
-               <div className="font-medium">Articles have not refreshed today</div>
+               <div className="font-medium">Articles have not refreshed recently</div>
                <div className="mt-1 text-amber-200/90">
                   Latest stored article: {formatDate(latestPublishedDate)}
-                  {latestCrawledDate ? `, last crawled: ${formatDate(latestCrawledDate)}` : ''}. Check the
-                  Feed Processor task logs for the failed feed refresh.
+                  {latestCrawledDate ? `, last refreshed: ${formatDate(latestCrawledDate)}` : ''}. Check the
+                  Feed Processor task logs if this persists for more than 30 hours.
                </div>
             </div>
          )}

@@ -15,7 +15,7 @@ const Voyager = () => {
    const [currentOutput, setCurrentOutput] = useState('');
    const [currentOutputTaskName, setCurrentOutputTaskName] = useState('');
    const [executionsPage, setExecutionsPage] = useState(1);
-   const [executionsPerPage, setExecutionsPerPage] = useState(10);
+   const [executionsPerPage] = useState(10);
    const [executionsTotalPages, setExecutionsTotalPages] = useState(0);
    const [executionsTotal, setExecutionsTotal] = useState(0);
    const [executionsHasNext, setExecutionsHasNext] = useState(false);
@@ -85,6 +85,8 @@ const Voyager = () => {
       } else if (activeTab === 'podcast-configs') {
          loadPodcastConfigs();
       }
+   // Loading is intentionally driven by tab changes; the other values are passed by handlers.
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [activeTab]);
 
    const handleExecutionsPageChange = newPage => {

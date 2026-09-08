@@ -56,7 +56,7 @@ const Podcasts = () => {
    const [error, setError] = useState(null);
    const [hoveredItem, setHoveredItem] = useState(null);
    const [page, setPage] = useState(1);
-   const [perPage, setPerPage] = useState(10);
+   const [perPage] = useState(10);
    const [totalPages, setTotalPages] = useState(0);
    const [totalItems, setTotalItems] = useState(0);
    const [hasNext, setHasNext] = useState(false);

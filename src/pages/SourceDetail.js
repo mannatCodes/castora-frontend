@@ -32,6 +32,8 @@ const SourceDetail = () => {
 
    useEffect(() => {
       fetchSourceDetail();
+   // fetchSourceDetail is recreated per render and uses sourceId.
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [sourceId]);
 
    const handleGoBack = () => {

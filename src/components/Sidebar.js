@@ -22,6 +22,8 @@ const Sidebar = ({ onNewSession, onSessionSelect }) => {
 
    useEffect(() => {
       loadSessions();
+   // loadSessions uses pagination.page to load the active page.
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [pagination.page]);
 
    const loadSessions = async (resetToFirstPage = false) => {

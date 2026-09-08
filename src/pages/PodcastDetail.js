@@ -1,23 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
-   ChevronDown,
-   ChevronUp,
-   Eye,
    FileText,
    Globe,
    Calendar,
    Volume2,
    Play,
    ExternalLink,
-   Users,
    Sparkles,
    X,
-   Download,
    Edit3,
    Trash2,
    Info,
-   Pause,
    ChevronLeft,
    ChevronRight,
 } from 'lucide-react';

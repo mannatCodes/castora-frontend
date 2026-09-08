@@ -4,24 +4,12 @@ import Sidebar from '../components/Sidebar';
 import api from '../services/api';
 
 const StudioLanding = () => {
-   const [sessionCount, setSessionCount] = useState(0);   
    const [loading, setLoading] = useState(false);
    const [error, setError] = useState(null);
    const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
    const navigate = useNavigate();
 
    useEffect(() => {
-      const fetchSessionCount = async () => {
-         try {
-            const response = await api.podcastAgent.listSessions();
-            if (response && Array.isArray(response.data.sessions)) {
-               setSessionCount(response.data.sessions.length);
-            }
-         } catch (error) {
-            console.error('Error fetching sessions:', error);
-         }
-      };
-      fetchSessionCount();
       const handleResize = () => {
          if (window.innerWidth >= 768) {
             setIsMobileSidebarOpen(false);

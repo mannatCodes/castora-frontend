@@ -2,7 +2,7 @@
   "name": "castora-web",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://castora-backend-3.onrender.com",
+  "proxy": "https://castora-backend-1.onrender.com",
   "dependencies": {
     "@tailwindcss/cli": "^4.1.4",
     "@tailwindcss/postcss": "^4.1.4",
