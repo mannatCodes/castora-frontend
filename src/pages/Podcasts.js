@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles } from 'lucide-react';
+import { Radio, Sparkles } from 'lucide-react';
 import api from '../services/api';
 
 const ToggleSwitch = ({ isActive, isUpdating, onChange }) => {
@@ -164,44 +164,8 @@ const Podcasts = () => {
       <div className="max-w-6xl mx-auto">
          <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 relative">
             <div className="relative mb-4 md:mb-0">
-               <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-8 h-8">
-                  <div className="relative w-8 h-8">
-                     <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="text-amber-500 w-8 h-8 relative z-10"
-                     >
-                        <path
-                           d="M12 1C8.14 1 5 4.14 5 8V11C5 14.86 8.14 18 12 18C15.86 18 19 14.86 19 11V8C19 4.14 15.86 1 12 1Z"
-                           stroke="currentColor"
-                           strokeWidth="1.5"
-                        />
-                        <path
-                           d="M12 18V23"
-                           stroke="currentColor"
-                           strokeWidth="1.5"
-                           strokeLinecap="round"
-                        />
-                        <path
-                           d="M8 23H16"
-                           stroke="currentColor"
-                           strokeWidth="1.5"
-                           strokeLinecap="round"
-                        />
-                        <path
-                           d="M13.5 6.5C13.5 7.33 12.83 8 12 8C11.17 8 10.5 7.33 10.5 6.5C10.5 5.67 11.17 5 12 5C12.83 5 13.5 5.67 13.5 6.5Z"
-                           fill="currentColor"
-                        />
-                        <path
-                           d="M16 11V11.25C16 13.32 14.32 15 12.25 15H11.75C9.68 15 8 13.32 8 11.25V11"
-                           stroke="currentColor"
-                           strokeWidth="1.5"
-                           strokeLinecap="round"
-                        />
-                     </svg>
-                     <div className="absolute inset-0 bg-amber-500 opacity-30 blur-md rounded-full"></div>
-                  </div>
+               <div className="absolute left-0 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-amber-500/15 text-amber-400 shadow-lg shadow-amber-950/30 ring-1 ring-amber-400/30">
+                  <Radio className="h-4 w-4" aria-hidden="true" />
                </div>
                <h1 className="text-2xl font-medium text-gray-100 ml-10">Podcasts</h1>
             </div>
