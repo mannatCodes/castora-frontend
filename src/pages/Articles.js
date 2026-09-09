@@ -22,6 +22,7 @@ const Articles = () => {
    const [dateTo, setDateTo] = useState('');
    const [searchQuery, setSearchQuery] = useState('');
    const [isFilterOpen, setIsFilterOpen] = useState(false);
+   const [refreshTick, setRefreshTick] = useState(0);
    useEffect(() => {
       const fetchSources = async () => {
          try {
@@ -65,7 +66,15 @@ const Articles = () => {
       };
 
       fetchArticles();
-   }, [page, perPage, selectedSource, dateFrom, dateTo, searchQuery]);
+   }, [page, perPage, selectedSource, dateFrom, dateTo, searchQuery, refreshTick]);
+
+   useEffect(() => {
+      // Feed ingestion is asynchronous in production. Keep the list current
+      // while this page is open so users do not need to manually refresh until
+      // the next scheduled batch becomes available.
+      const refreshTimer = setInterval(() => setRefreshTick(tick => tick + 1), 20000);
+      return () => clearInterval(refreshTimer);
+   }, []);
 
    const handleFilterSubmit = e => {
       e.preventDefault();

@@ -1,14 +1,24 @@
 import axios from 'axios';
 
+const configuredApiBaseUrl = (process.env.REACT_APP_API_BASE_URL || '').replace(/\/$/, '');
+const runningLocally = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+
+// In production the FastAPI app serves this build, so use its origin instead
+// of a hard-coded Render hostname. Local builds still work with `python main.py`.
 const API_BASE_URL =
-   process.env.REACT_APP_API_BASE_URL || 'https://castora-backend-1.onrender.com';
+   configuredApiBaseUrl || (runningLocally ? 'http://127.0.0.1:7000' : window.location.origin);
 
 const api = axios.create({
    baseURL: API_BASE_URL,
-   timeout: 60000 * 5,
+   // A disconnected API must show the page error state promptly, not leave
+   // Articles, Podcasts, Sources, and Studio in a spinner for five minutes.
+   timeout: 15000,
    headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
+      // Article batches are written asynchronously. Do not let a browser or
+      // intermediary return an older list during the automatic refresh.
+      'Cache-Control': 'no-cache',
    },
 });
 
@@ -23,6 +33,15 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
    response => {
+      // A separate frontend deployment can accidentally route /api requests
+      // to its SPA fallback, which returns index.html with HTTP 200. Treat it
+      // as an API failure instead of letting every page consume invalid data.
+      const contentType = response.headers?.['content-type'] || '';
+      if (response.config.url?.startsWith('/api/') && !contentType.includes('application/json')) {
+         return Promise.reject(
+            new Error('The API returned a non-JSON response. Check REACT_APP_API_BASE_URL.')
+         );
+      }
       if (
          response.data &&
          response.data.items &&
@@ -40,6 +59,9 @@ api.interceptors.response.use(
       return response;
    },
    error => {
+      if (error.code === 'ECONNABORTED') {
+         error.message = 'The API did not respond within 15 seconds. Please try again.';
+      }
       if (error.response) {
          console.error('API Error:', error.response.data);
       } else if (error.request) {
