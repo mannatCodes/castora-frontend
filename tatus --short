@@ -1,0 +1,15 @@
+[1mdiff --git a/vercel.json b/vercel.json[m
+[1mdeleted file mode 100644[m
+[1mindex 29c0269f..00000000[m
+[1m--- a/vercel.json[m
+[1m+++ /dev/null[m
+[36m@@ -1,8 +0,0 @@[m
+[31m-{[m
+[31m-  "rewrites": [[m
+[31m-    {[m
+[31m-      "source": "/(.*)",[m
+[31m-      "destination": "/index.html"[m
+[31m-    }[m
+[31m-  ][m
+[31m-}[m
+\ No newline at end of file[m
