@@ -691,29 +691,13 @@ const PodcastSession = () => {
                         )}
                      </button>
                      <div className="flex items-center">
-                        <div className="w-10 h-10 relative mr-3 flex-shrink-0">
-                           <div className="absolute inset-0 flex items-center justify-center z-10">
-                              <svg
-                                 viewBox="0 0 24 24"
-                                 className="w-7 h-7 text-amber-500"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 strokeWidth="1.5"
-                                 strokeLinecap="round"
-                                 strokeLinejoin="round"
-                              >
-                                 <rect x="4" y="4" width="16" height="16" rx="2" />
-                                 <line x1="8" y1="4" x2="8" y2="20" />
-                                 <line x1="12" y1="4" x2="12" y2="20" />
-                                 <line x1="16" y1="4" x2="16" y2="20" />
-                                 <circle cx="8" cy="9" r="1" fill="currentColor" />
-                                 <circle cx="12" cy="13" r="1" fill="currentColor" />
-                                 <circle cx="16" cy="11" r="1" fill="currentColor" />
-                              </svg>
-                           </div>
-                           <div className="absolute inset-0 bg-amber-500 opacity-10 rounded-full blur-md"></div>
-                           <div className="absolute inset-0 rounded-full border border-gray-700 bg-gradient-to-r from-stone-900 to-zinc-950"></div>
-                        </div>
+                       <div className="w-10 h-10 relative mr-3 flex-shrink-0 flex items-center justify-center">
+                         <img
+                           src={`${process.env.PUBLIC_URL}/castora-mark.svg`}
+                           alt="Castora"
+                           className="w-7 h-7 object-contain"
+                        />
+                    </div>
                         <h1 className="text-lg font-semibold text-white truncate max-w-[180px] sm:max-w-xs">
                            {podcastInfo.title}
                         </h1>
