@@ -366,14 +366,11 @@ const Sidebar = ({ onNewSession, onSessionSelect }) => {
             <Link to="/" className="flex items-center group">
                <div className="w-8 h-8 relative mr-2 flex-shrink-0">
                   <div className="absolute inset-0 flex items-center justify-center z-10">
-                     <span
-                        className="text-xl filter transition-transform group-hover:scale-110"
-                        style={{
-                           textShadow: '0 0 10px rgba(16, 185, 129, 0.6)',
-                        }}
-                     >
-                        🦉
-                     </span>
+                     <img
+                        src={`${process.env.PUBLIC_URL}/castora-mark.svg`}
+                        alt="Castora"
+                        className="w-7 h-7 object-contain transition-transform group-hover:scale-110"
+                     />
                   </div>
                   <div className="absolute inset-0 bg-amber-500 opacity-10 rounded-full blur-lg group-hover:opacity-20 transition-opacity"></div>
                   <div className="absolute inset-0 rounded-full border border-gray-700/30 bg-gradient-to-br from-stone-900 to-zinc-950"></div>
